@@ -1,0 +1,21 @@
+service: yfinance-api
+
+provider:
+  name: aws
+  region: us-east-1
+  profile: oldst-main
+  timeout: 30
+  memorySize: 1024
+  ecr:
+    images:
+      yfinance:
+        path: ./
+
+functions:
+  fetch:
+    image:
+      name: yfinance
+    events:
+      - httpApi:
+          path: /fetch
+          method: post
